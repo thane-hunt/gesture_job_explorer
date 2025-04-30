@@ -14,6 +14,21 @@
       background: #000;
       color: #fff;
     }
+	
+	#lottieWrapper {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  margin: 1rem auto;
+	  width: 100%;
+	}
+
+	#lottieContainer {
+	  width: 500px;
+	  max-width: 90vw;
+	  height: auto;
+	}
+	
     h1 { text-align: center; }
     .filter-container { margin-bottom: 1rem; text-align: center; }
     .job-grid {
@@ -81,7 +96,14 @@
   </style>
 </head>
 <body>
-<div id="lottieContainer" style="width: 600px; margin: 0 auto;"></div>
+<body>
+
+  <div id="lottieWrapper">
+    <div id="lottieContainer"></div>
+  </div>
+
+
+
   <h1>Gesture Job Explorer</h1>
   <div class="filter-container">
     <label for="contextFilter">Filter by Context:</label>
