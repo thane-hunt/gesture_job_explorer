@@ -1,4 +1,6 @@
 let jobs = [];
+const shuffleJobs = true; // Set to true to randomize job order each load
+
 const jobGrid = document.getElementById("jobGrid");
 const modal = document.getElementById("jobModal");
 const modalTitle = document.getElementById("modalTitle");
@@ -7,7 +9,7 @@ const modalAnalysis = document.getElementById("modalAnalysis");
 const modalTags = document.getElementById("modalTags");
 const contextFilter = document.getElementById("contextFilter");
 
-//Load Lottie Animation
+// Load Lottie Animation
 lottie.loadAnimation({
   container: document.getElementById('lottieContainer'),
   renderer: 'svg',
@@ -15,7 +17,6 @@ lottie.loadAnimation({
   autoplay: true,
   path: 'Icon+wordmark_White_1920x1080.json'  // Path to your Lottie JSON file
 });
-
 
 // Load and parse CSV
 Papa.parse("jobs.csv", {
@@ -52,9 +53,18 @@ function populateFilter() {
   });
 }
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 function renderJobs(filterTag = "") {
   jobGrid.innerHTML = "";
-  const filtered = filterTag ? jobs.filter(job => job.tags.includes(filterTag)) : jobs;
+  let filtered = filterTag ? jobs.filter(job => job.tags.includes(filterTag)) : [...jobs];
+  if (shuffleJobs) shuffleArray(filtered);
+
   filtered.forEach(job => {
     const card = document.createElement("div");
     card.className = "job-card";
